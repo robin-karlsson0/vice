@@ -1,0 +1,442 @@
+{
+    "airstore_imagenet": {
+        "train": [
+            "airstore://flashblade_imagenet_train",
+            "<unused>"
+        ],
+        "val": [
+            "airstore://flashblade_imagenet_val",
+            "<unused>"
+        ]
+    },
+    "imagenet1k_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "imagenet_a_filelist": {
+        "train": [
+            "<not_used>",
+            "<not_used>"
+        ],
+        "val": [
+            "<path_to_test_images.npy>",
+            "<path_to_test_labels.npy>"
+        ]
+    },
+    "imagenet_r_filelist": {
+        "train": [
+            "<not_used>",
+            "<not_used>"
+        ],
+        "val": [
+            "<path_to_test_images.npy>",
+            "<path_to_test_labels.npy>"
+        ]
+    },
+    "imagenette_160_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "places205_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "places365_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "CIFAR10": {
+        "train": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ],
+        "val": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ]
+    },
+    "CIFAR100": {
+        "train": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ],
+        "val": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ]
+    },
+    "STL10": {
+        "train": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ],
+        "val": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ]
+    },
+    "MNIST": {
+        "train": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ],
+        "val": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ]
+    },
+    "SVHN": {
+        "train": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ],
+        "val": [
+            "<path_to_pytorch_dataset>",
+            "<unused>"
+        ]
+    },
+    "inaturalist2018_filelist": {
+        "train": [
+            "<path_to_train_images.npy>",
+            "<path_to_train_labels.npy>"
+        ],
+        "val": [
+            "<path_to_val_images.npy>",
+            "<path_to_val_labels.npy>"
+        ]
+    },
+    "yfcc100m": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "aircrafts_folder": {
+        "train": [
+            "<img_path>",
+            "<unused>"
+        ],
+        "val": [
+            "<img_path>",
+            "<unused>"
+        ]
+    },
+    "caltech101_folder": {
+        "train": [
+            "<img_path>",
+            "<unused>"
+        ],
+        "val": [
+            "<img_path>",
+            "<unused>"
+        ]
+    },
+    "clevr_count_filelist": {
+        "train": [
+            "<path_to_train_images.npy>",
+            "<path_to_train_labels.npy>"
+        ],
+        "val": [
+            "<path_to_val_images.npy>",
+            "<path_to_val_labels.npy>"
+        ]
+    },
+    "clevr_dist_filelist": {
+        "train": [
+            "<path_to_train_images.npy>",
+            "<path_to_train_labels.npy>"
+        ],
+        "val": [
+            "<path_to_val_images.npy>",
+            "<path_to_val_labels.npy>"
+        ]
+    },
+    "dsprites_loc_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "dsprites_orient_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "dtd_folder": {
+        "train": [
+            "<img_path>",
+            "<unused>"
+        ],
+        "val": [
+            "<img_path>",
+            "<unused>"
+        ]
+    },
+    "euro_sat_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "food101_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "gtsrb_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "kitti_dist_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "oxford_flowers_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "oxford_pets_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "pcam_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "small_norb_azimuth_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "small_norb_elevation_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "stanford_cars_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "sun397_filelist": {
+        "train": [
+            "<path_to_train_images.npy>",
+            "<path_to_train_labels.npy>"
+        ],
+        "val": [
+            "<path_to_val_images.npy>",
+            "<path_to_val_labels.npy>"
+        ]
+    },
+    "ucf101_folder": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "voc2007_folder": {
+        "train": [
+            "<root_folder>",
+            "<root_folder>"
+        ],
+        "val": [
+            "<root_folder>",
+            "<root_folder>"
+        ]
+    },
+    "voc2012_folder": {
+        "train": [
+            "<root_folder>",
+            "<root_folder>"
+        ],
+        "val": [
+            "<root_folder>",
+            "<root_folder>"
+        ]
+    },
+    "coco_folder": {
+        "train": [
+            "<root_folder>",
+            "<root_folder>"
+        ],
+        "val": [
+            "<root_folder>",
+            "<root_folder>"
+        ]
+    },
+    "imagenet1k-per01": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "imagenet1k-per10": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "google-imagenet1k-per01": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "google-imagenet1k-per10": {
+        "train": [
+            "<img_path>",
+            "<lbl_path>"
+        ],
+        "val": [
+            "<img_path>",
+            "<lbl_path>"
+        ]
+    },
+    "road_scene_dataset": {
+        "train": [
+            "filelist.npy",
+            "<unused>"
+        ],
+        "val": [
+            "filelist.npy",
+            "<unused>"
+        ]
+    },
+    "imagenet_dataset": {
+        "train": [
+            "filelist_imagenet.npy",
+            "<unused>"
+        ],
+        "val": [
+            "filelist_imagenet.npy",
+            "<unused>"
+        ]
+    },
+    "coco_dataset": {
+        "train": [
+            "filelist_coco.npy",
+            "<unused>"
+        ],
+        "val": [
+            "filelist_coco.npy",
+            "<unused>"
+        ]
+    },
+    "cityscapes_dataset": {
+        "train": [
+            "filelist_cityscapes.npy",
+            "<unused>"
+        ],
+        "val": [
+            "filelist_cityscapes.npy",
+            "<unused>"
+        ]
+    }
+}

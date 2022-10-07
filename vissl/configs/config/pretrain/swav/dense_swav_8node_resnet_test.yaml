@@ -1,0 +1,208 @@
+# @package _global_
+config:
+  VERBOSE: False
+  LOG_FREQUENCY: 10
+  TEST_ONLY: False
+  TEST_MODEL: False
+  SEED_VALUE: 0
+  MULTI_PROCESSING_METHOD: forkserver
+  HOOKS:
+    PERF_STATS:
+      MONITOR_PERF_STATS: True
+      ROLLING_BTIME_FREQ: 313
+    TENSORBOARD_SETUP:
+      USE_TENSORBOARD: True
+      FLUSH_EVERY_N_MIN: 5
+      LOG_PARAMS: True  # Log model params
+      LOG_PARAMS_GRADIENTS: True
+      LOG_PARAMS_EVERY_N_ITERS: 310
+      # Dense SwAV parameters
+      LOG_EMBEDDINGS: False
+      QUEUE_SAMPLING_N: 10000
+      PARAMS_PER_EMB_RATIO: 10
+  DATA:
+    NUM_DATALOADER_WORKERS: 8
+    analyze_common_view_element_count:  # Debug function (blank or integer)
+    TRAIN:
+      DATA_SOURCES: [disk_filelist]
+      DATASET_NAMES: [road_scene_dataset]
+      DATASET_TYPE: dense_ssl_dataset
+      BATCHSIZE_PER_REPLICA: 4  # Sample images
+      LABEL_TYPE: sample_index    # just an implementation detail. Label isn't used
+      TRANSFORMS:
+        #- name: ImgPilToMultiCrop
+        #  total_num_crops: 8
+        #  size_crops: [224, 96]
+        #  num_crops: [2, 6]
+        #  crop_scales: [[0.14, 1], [0.05, 0.14]]
+        #- name: RandomHorizontalFlip
+        #  p: 0.5
+        - name: ImgPilColorDistortion
+          strength: 1.0
+        - name: ImgPilGaussianBlur
+          p: 0.5
+          radius_min: 0.1
+          radius_max: 2.0
+        - name: ToTensor
+        - name: Normalize
+          mean: [0.485, 0.456, 0.406]
+          std: [0.229, 0.224, 0.225]
+      COLLATE_FUNCTION: dense_collator
+      MMAP_MODE: True
+      COPY_TO_LOCAL_DISK: False
+      COPY_DESTINATION_DIR: /tmp/road_scene_dataset/
+      DROP_LAST: True
+      dense_swav:
+        std_image_width: 1280  #640  #1280
+        std_image_height: 960  #480  #960
+        view_size: 400
+        max_common_size: 370000000000
+        view_n: 4  # Incl. center view
+        superpixel_region_size: 20
+        superpixel_ruler: 10
+        superpixel_iters: 5
+        mask_intensity: 0.5
+        resize_range: [0.15, 2.]
+        res_ratios: [0.5, 1, 2, 4, 8]  # Must match number of views +1
+        prob_res_aug: 0.5  # Probability of doing resolution vs. context aug.
+        common_idx_preserve_ratio: 0.25
+        flip_views: True
+        view_sampling_conc_param_theta: 2.
+        view_sampling_conc_param_r: 2.
+  TRAINER:
+    TRAIN_STEP_NAME: standard_train_step
+  METERS:
+    name: ""
+  MODEL:
+    # HOW TO USE
+    #
+    # 1. Training with projections
+    #    OUT_FEAT_DIM: 256
+    #    OUTPUT_BACKBONE: False
+    #    USE_IDENTITY: False
+    #    OUTPUT_PROJECTIONS: False
+    #
+    # 2. Training without projections
+    #    OUT_FEAT_DIM: 128
+    #    OUTPUT_BACKBONE: False
+    #    USE_IDENTITY: True
+    #    OUTPUT_PROJECTIONS: False
+    #
+    # 3. Inference with projections
+    #    OUT_FEAT_DIM: 256
+    #    OUTPUT_BACKBONE: False
+    #    USE_IDENTITY: False
+    #    OUTPUT_PROJECTIONS: True
+    #
+    # 4. Inference without projections
+    #    OUT_FEAT_DIM: 128
+    #    OUTPUT_BACKBONE: True
+    #    USE_IDENTITY: False
+    #    OUTPUT_PROJECTIONS: True
+    TRUNK:
+      NAME: deeplabv3plus  # _legacy  <-- Registered name
+      DEEPLABV3PLUS:
+        BACKBONE: "resnet50"
+        OUTPUT_STRIDE: 8
+        PRETRAINED: True
+        IN_FEAT_DIM: 3
+        OUT_FEAT_DIM: 64
+        DECODER_CH: 512
+        FROZEN_STAGES: -1
+        OUTPUT_BACKBONE: False  # Output standard backbone features
+    HEAD:
+      USE_IDENTITY: True  # Skip projection head. NOTE: Overrides PARAMS
+      OUTPUT_PROJECTIONS: False  # Output projection layers (N, D, H, W) without computing scores
+      PARAMS: [
+        ["dense_swav_head", {"dims": [256, 256, 64], "use_bn": True, "num_clusters": [126]}],
+      ]
+    TEMP_FROZEN_PARAMS_ITER_MAP: [
+      ['module.heads.0.prototypes0.weight', 313],
+
+      # TODO (Min): FSDP need to return the original param name from named_parameters().
+
+      # Configuration for flatten_parameters = True
+      ['_fsdp_wrapped_module.heads.0._fsdp_wrapped_module._fpw_module.prototypes0._fsdp_wrapped_module.weight', 313],
+
+      # Configuration for flatten_parameters = False
+      ['_fsdp_wrapped_module.heads.0._fsdp_wrapped_module.prototypes0._fsdp_wrapped_module.weight', 313]
+    ]
+    SYNC_BN_CONFIG:
+      CONVERT_BN_TO_SYNC_BN: True
+      SYNC_BN_TYPE: apex
+      GROUP_SIZE: 8
+    AMP_PARAMS:
+      USE_AMP: True
+      AMP_ARGS: {"opt_level": "O1"}
+  LOSS:
+    name: dense_swav_loss
+    dense_swav_loss:
+      temperature: 0.1
+      use_double_precision: False
+      normalize_last_layer: True
+      num_iters: 3
+      epsilon: 0.05
+      crops_for_assign: [0]
+      temp_hard_assignment_iters: 0  # Compute hard assignments when bellow iter count
+      queue:
+        queue_length: 40000  # Split up for each GPU over all nodes
+        start_iter: 0
+        vecs_per_sample: 0  # Prototype vectors for one sample to add to queue (add all if 0)
+  OPTIMIZER:
+      name: sgd
+      use_larc: True
+      larc_config:
+        clip: False
+        trust_coefficient: 0.001
+        eps: 0.00000001
+      weight_decay: 0.000001
+      momentum: 0.9
+      nesterov: False
+      num_epochs: 2
+      # num_epochs: 100
+      # num_epochs: 200
+      # num_epochs: 800
+      # num_epochs: 1
+      # num_epochs: 2
+      # num_epochs: 5
+      regularize_bn: True
+      regularize_bias: True
+      param_schedulers:
+        lr:
+          # value: 0.1
+          #auto_lr_scaling:
+          #  auto_scale: true
+          #  base_value: 0.3
+          #  base_lr_batch_size: 1
+          name: composite
+          schedulers:
+            - name: linear
+              start_value: 0.01
+              end_value: 0.01
+            - name: cosine
+              start_value: 0.01
+              end_value: 0.00001
+          update_interval: step
+          interval_scaling: [rescaled, fixed]
+          lengths: [0.0, 1.0]               # 100ep
+          #lengths: [0.1, 0.9]               # 100ep
+          # lengths: [0.05, 0.95]             # 200ep
+          # lengths: [0.025, 0.975]           # 400ep
+          # lengths: [0.0125, 0.9875]         # 800ep
+          # lengths: [0.0128, 0.9872]         # 1ep IG-1B
+          # lengths: [0.00641, 0.99359]       # 2ep IG-1B
+          # lengths: [0.002563, 0.997437]     # 5ep IG-1B = 50 ep IG-100M
+  DISTRIBUTED:
+    BACKEND: nccl
+    NUM_NODES: 1
+    NUM_PROC_PER_NODE: 4
+    RUN_ID: auto
+    INIT_METHOD: tcp
+    NCCL_DEBUG: True
+  MACHINE:
+    DEVICE: gpu
+  CHECKPOINT:
+    DIR: "exp_dir_name"  # NOTE: Also Tensorboard output directory
+    AUTO_RESUME: False
+    CHECKPOINT_FREQUENCY: 1          # Epoch
+    CHECKPOINT_ITER_FREQUENCY: 10000  # Iteration

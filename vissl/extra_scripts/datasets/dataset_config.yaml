@@ -1,0 +1,85 @@
+datasets:
+    a2d2:
+        root_path: "/fsws1/share/database/a2d2"
+        use: True
+    apollo_daoxianglake:
+        root_path: "/fsws1/share/database/apollo_daoxianglake"
+        use: True
+    apolloscape:
+        root_path: "/fsws1/share/database/apolloscape"
+        use: True
+    argoverse:
+        root_path: "/fsws1/share/database/argoverse"
+        use: True
+    bdd100k:
+        root_path: "/fsws1/share/database/bdd100k"
+        use: True
+    boxy:
+        root_path: "/fsws1/share/database/boxy"
+        use: True
+    cadc:
+        root_path: "/fsws1/share/database/cadc"
+        use: True
+    cityscapes:
+        root_path: "/fsws1/share/database/cityscapes"
+        use: True
+    comma2k19:
+        root_path: "/fsws1/share/database/comma2k19"
+        use: True
+    ddad:
+        root_path: "/fsws1/share/database/ddad"
+        use: True
+    ecp:
+        root_path: "/fsws1/share/database/ecp"
+        use: True
+    global_road_damage_detection:
+        root_path: "/fsws1/share/database/global_road_damage_detection"
+        use: True
+    gta5:
+        root_path: "/fsws1/share/database/gta5"
+        use: True
+    h3d:
+        root_path: "/fsws1/share/database/honda_h3d"
+        use: True
+    hdd:
+        root_path: "/fsws1/share/database/honda_hdd"
+        use: True
+    hevi:
+        root_path: "/fsws1/share/database/honda_hevi"
+        use: True
+    honda_hsd:
+        root_path: "/fsws1/share/database/honda_hsd"
+        use: True
+    honda_had:
+        root_path: "/fsws1/share/database/honda_research_institute_advice_dataset"
+        use: True
+    honda_titan:
+        root_path: "/fsws1/share/database/honda_titan_dataset"
+        use: True
+    idd:
+        root_path: "/fsws1/share/database/idd"
+        use: True
+    kitti:
+        root_path: "/fsws1/share/database/kitti"
+        use: True
+    lyft_perception:
+        root_path: "/fsws1/share/database/lyft_perception"
+        use: True
+    mapillary_vistas:
+        root_path: "/fsws1/share/database/mapillary_vistas"
+        use: True
+    nuimages:
+        root_path: "/fsws1/share/database/nuimages"
+        use: True
+    nuscenes:
+        root_path: "/fsws1/share/database/NUSCENES"
+        use: True
+    pandaset:
+        root_path: "/fsws1/share/database/pandaset"
+        use: True
+    tusimple:
+        root_path: "/fsws1/share/database/tusimple"
+        use: True
+    waymo:
+        root_path: "/fsws1/share/database/waymo_open"
+        use: True
