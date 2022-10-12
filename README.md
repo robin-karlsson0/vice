@@ -1,6 +1,8 @@
-# ViCE: Self-Supervised Visual Concept Embeddings as Contextual and Pixel Appearance Invariant Semantic Representations
+# ViCE: Improving Dense Representation Learning by Superpixelization and Contrasting Cluster Assignment
 
-This repository contain code to reproduce results in the paper "ViCE: Self-Supervised Visual Concept Embeddings as Contextual and Pixel Appearance Invariant Semantic Representations". We provide instructions for installations and running experiments.
+This repository contain the code to reproduce results in the paper "ViCE: Improving Dense Representation Learning by Superpixelization and Contrasting Cluster Assignment". We provide instructions for installations and running experiments.
+
+Paper link: [https://arxiv.org/abs/2111.12460v3](https://arxiv.org/abs/2111.12460v3)
 
 ## Summary
 
